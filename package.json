@@ -1,0 +1,54 @@
+{
+    "name": "youtrack-gs",
+    "version": "1.3.2",
+    "description": "Client library for accessing YouTrack REST API for Google Apps Script",
+    "scripts": {
+        "build": "webpack --display-error-details",
+        "deploy": "npm run build && clasp push -f",
+        "deploy:prod": "cross-env NODE_ENV=production npm run deploy"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/siquylee/youtrack-gs.git"
+    },
+    "keywords": [
+        "youtrack",
+        "rest api",
+        "jetbrains",
+        "sdk",
+        "client",
+        "typescript",
+        "issue tracking",
+        "google apps script"
+    ],
+    "author": "siquyee",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/siquylee/youtrack-gs/issues"
+    },
+    "homepage": "https://github.com/siquylee/youtrack-gs#readme",
+    "devDependencies": {
+        "@babel/core": "^7.9.0",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+        "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+        "@babel/plugin-transform-regenerator": "^7.8.7",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/preset-env": "^7.9.0",
+        "@babel/preset-typescript": "^7.9.0",
+        "@babel/runtime": "^7.9.2",
+        "@types/google-apps-script": "^1.0.11",
+        "@types/string-template": "^1.0.2",
+        "babel-loader": "^8.1.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^6.0.2",
+        "cross-env": "^7.0.2",
+        "gas-webpack-plugin": "^1.0.2",
+        "terser-webpack-plugin": "^2.3.5",
+        "webpack": "^4.42.1",
+        "webpack-cli": "^3.3.11"
+    },
+    "dependencies": {
+        "string-template": "^1.0.0"
+    }
+}
