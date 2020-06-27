@@ -33,7 +33,7 @@ interface RequestOptions {
 
 export class Youtrack implements YoutrackClient {
     private readonly baseUrl: string;
-    private defaultRequestOptions: RequestOptions = { muteHttpExceptions: true, contentType: 'application/json' };
+    private defaultRequestOptions: RequestOptions = { muteHttpExceptions: false, contentType: 'application/json' };
     public readonly users: UserEndpoint;
     public readonly tags: TagEndpoint;
     public readonly issues: IssueEndpoint;
@@ -80,8 +80,10 @@ export class Youtrack implements YoutrackClient {
     private fetch(url: string, params: any): GoogleAppsScript.URL_Fetch.HTTPResponse {
         if (params.qs) {
             url = `${url}?${this.toQueryString(params.qs)}`;
+            delete params.qs;
         }
-        return UrlFetchApp.fetch(url, params);;
+        var res = UrlFetchApp.fetch(url, params);
+        return res;
     }
 
     private formBaseUrl(baseUrl: string): string {
@@ -95,6 +97,11 @@ export class Youtrack implements YoutrackClient {
     }
 
     private prepareParams(method: 'post' | 'get' | 'delete' | 'put', params: any, customHeaders: {}): {} {
+        if (method !== 'get') {
+            params.payload = JSON.stringify(params);
+        }
+        params.method = method;
+
         if ('headers' in this.defaultRequestOptions && Object.keys(customHeaders).length > 0) {
             // merge the header parameters
             const { headers, ...defaultOptions } = this.defaultRequestOptions;
@@ -103,8 +110,6 @@ export class Youtrack implements YoutrackClient {
         if ('headers' in this.defaultRequestOptions) {
             return { ...this.defaultRequestOptions, ...params }
         }
-        params.payload = JSON.stringify(params);
-        params.method = method;
         return { ...this.defaultRequestOptions, ...params, headers: { ...customHeaders } }
     }
 

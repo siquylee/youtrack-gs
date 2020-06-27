@@ -13,10 +13,12 @@ export class BaseEndpoint {
     protected toPromise<T>(response: GoogleAppsScript.URL_Fetch.HTTPResponse): Promise<T> {
         return new Promise((resolve, reject) => {
             let status = response.getResponseCode();
-            let json = response.getContentText();
+            let content = response.getContentText();
+            let contentType = (response.getHeaders() as any)['Content-Type'] as string;
+            let isJSON = contentType ? contentType.includes('application/json') : false;
 
             try {
-                let result = JSON.parse(json) as T;
+                let result: T | any = isJSON ? JSON.parse(content) as T : content;
                 if (200 <= status && status < 300) {
                     resolve(result);
                 } else {

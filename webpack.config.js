@@ -70,6 +70,10 @@ module.exports = (env) => {
                     {
                         from: `${src}/appsscript.json`,
                         to: dest
+                    },
+                    {
+                        from: `${src}/examples.js`,
+                        to: dest
                     }
                 ]
             }),
