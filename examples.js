@@ -1,6 +1,6 @@
 const config = {
   baseUrl: "https://gslack.myjetbrains.com/youtrack",
-  token: "perm:cXV5bHM=.NDctMA==.IdUew3Z7hMc47UB46zU4WZTsO7SeVE"
+  token: "perm:cXV5bHM=.NDctMQ==.l64FIOR6KEGaCAKq3FiZI33dyccBIY"
 };
 
 // Users
@@ -227,6 +227,232 @@ function deleteWorkItem() {
   client.workItems.delete('SYT-3', '136-0')
     .then(() => {
       Logger.log('workitem deleted.');
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+// Issue Comments
+
+function getComments() {
+  // list comments of an issue
+  const client = new ytGAS.Youtrack(config);
+  client.comments.all('SYT-3').then((comments) => {
+    Logger.log(comments);
+  }).catch(err => {
+    Logger.log(err);
+  });
+}
+
+function createComment() {
+  // add comment to issue
+  const client = new ytGAS.Youtrack(config);
+  client.comments.create('SYT-3', {
+    text: 'issue comment'
+  }).then(comment => {
+    Logger.log(comment);
+  }).catch(err => {
+    Logger.log(err);
+  });
+}
+
+function updateComment() {
+  // update comment
+  const client = new ytGAS.Youtrack(config);
+  client.comments.update('SYT-3', {
+    id: '4-3',
+    text: 'updated issue comment'
+  }).then(comment => {
+    Logger.log(comment);
+  }).catch(err => {
+    Logger.log(err);
+  });
+}
+
+function deleteComment() {
+  // delete a comment
+  const client = new ytGAS.Youtrack(config);
+  client.comments.delete('SYT-3', '4-1')
+    .then(() => {
+      Logger.log('comment deleted.');
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+// Issue Tags
+
+function getTags() {
+  // get all tags
+  const client = new ytGAS.Youtrack(config);
+  client.tags.all()
+    .then((tags) => {
+      Logger.log({ tags });
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function getTagById() {
+  // get tag by id
+  const client = new ytGAS.Youtrack(config);
+  client.tags.byId('6-0')
+    .then((tag) => {
+      Logger.log(tag);
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+// Issue Links
+
+function getIssueLinks() {
+  // get issue links of issue
+  const client = new ytGAS.Youtrack(config);
+  client.issues.byId('SYT-3')
+    .then((issue) => {
+      Logger.log({ links: issue.links });
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function updateIssueLinks() {
+  // update issue link(s)
+  const client = new ytGAS.Youtrack(config);
+  client.issues.update({
+    id: 'SYT-3',
+    links: [
+      {
+        issues: [
+          {
+            id: '2-7'
+          }
+        ],
+        id: '104-3s',
+      }
+    ]
+  }).then((issue) => {
+    Logger.log({ links: issue.links });
+  }).catch(err => {
+    Logger.log(err);
+  });
+}
+
+// Agiles
+
+function getAgiles() {
+  // get all agile boards
+  const client = new ytGAS.Youtrack(config);
+  client.agiles.all()
+    .then((agiles) => {
+      Logger.log(agiles);
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function getAgileById() {
+  // get specific agile board by id
+  const client = new ytGAS.Youtrack(config);
+  client.agiles.byId('115-0')
+    .then((agile) => {
+      Logger.log(agile);
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function createAgile() {
+  // create new agile board
+  const client = new ytGAS.Youtrack(config);
+  client.agiles.create({
+    name: '19-15',
+    projects: [{ id: '0-0' }]
+  }).then((agile) => {
+    Logger.log(agile);
+  }).catch(err => {
+    Logger.log(err);
+  });
+}
+
+function deleteAgile() {
+  // delete an agile board 
+  const client = new ytGAS.Youtrack(config);
+  client.agiles.delete('115-2')
+    .then(() => {
+      Logger.log('agile deleted.');
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function updateAgile() {
+  // update an agile board
+  const client = new ytGAS.Youtrack(config);
+  client.agiles.update({
+    id: '115-2', projects: [{ id: '0-0' }]
+  }).then((agile) => {
+    Logger.log(agile);
+  }).catch(err => {
+    Logger.log(err);
+  });
+}
+
+// Sprints
+
+const agileId = '115-1';
+
+function getSprints() {
+  // get all sprints of an agile board
+  const client = new ytGAS.Youtrack(config);
+  client.sprints.all(agileId)
+    .then(sprints => {
+      Logger.log(sprints);
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function getSprintById() {
+  // get agile sprint by id
+  const client = new ytGAS.Youtrack(config);
+  client.sprints.byId(agileId, '116-1')
+    .then(sprint => {
+      Logger.log(sprint);
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function createSprint() {
+  // create new sprint
+  const client = new ytGAS.Youtrack(config);
+  client.sprints.create(agileId, { name: 'my sprint' })
+    .then(sprint => {
+      Logger.log(sprint);
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function updateSprint() {
+  // update a sprint
+  const client = new ytGAS.Youtrack(config);
+  client.sprints.update(agileId, { id: '116-1', name: 'my sprint 3' })
+    .then(sprint => {
+      Logger.log( sprint );
+    }).catch(err => {
+      Logger.log(err);
+    });
+}
+
+function deleteSprint() {
+  // delete a sprint
+  const client = new ytGAS.Youtrack(config);
+  client.sprints.delete(agileId, '116-1')
+    .then(() => {
+      Logger.log('sprint deleted.');
     }).catch(err => {
       Logger.log(err);
     });

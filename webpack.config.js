@@ -44,7 +44,7 @@ module.exports = (env) => {
                             comments: false
                         },
                         keep_classnames: !isProduction,
-                        keep_fnames: true,
+                        keep_fnames: !isProduction,
                     }
                 })
             ]
