@@ -11,4 +11,5 @@ export class ProjectCustomFieldImpl {
 }
 
 export interface ProjectCustomField extends ProjectCustomFieldImpl {
+
 }

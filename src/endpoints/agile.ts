@@ -8,6 +8,7 @@ export const AgilePaths = {
 };
 
 export class AgileEndpoint extends BaseEndpoint {
+
     public all(paginationOptions: PaginationOptions = {}): Promise<ReducedAgile[]> {
         return this.getResourceWithFields<ReducedAgile[]>(AgilePaths.agiles, ReducedAgileImpl, { qs: paginationOptions });
     }

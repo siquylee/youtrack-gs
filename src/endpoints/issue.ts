@@ -14,6 +14,7 @@ export const CommandPaths = {
 };
 
 export class IssueEndpoint extends BaseEndpoint {
+
     public byId(issueId: string): Promise<Issue> {
         return this.getResourceWithFields<Issue>(this.format(IssuePaths.issue, { issueId }), IssueImpl);
     }

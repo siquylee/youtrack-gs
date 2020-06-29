@@ -9,6 +9,7 @@ export const UserPaths = {
 };
 
 export class UserEndpoint extends BaseEndpoint {
+
     public current(): Promise<User> {
         return this.getResourceWithFields<User>(UserPaths.current, UserImpl);
     }

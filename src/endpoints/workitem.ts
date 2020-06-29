@@ -8,6 +8,7 @@ export const WorkItemPaths = {
 };
 
 export class WorkItemEndpoint extends BaseEndpoint {
+
     public all(issueId: string, paginationOptions: PaginationOptions = {}): Promise<WorkItem[]> {
         return this.getResourceWithFields<WorkItem[]>(this.format(WorkItemPaths.workitems, { issueId }), WorkItemImpl, { qs: paginationOptions });
     }

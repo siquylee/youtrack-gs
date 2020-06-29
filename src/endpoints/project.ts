@@ -10,6 +10,7 @@ export const ProjectPaths = {
 };
 
 export class ProjectEndpoint extends BaseEndpoint {
+
     public all(paginationOptions: PaginationOptions = {}): Promise<ReducedProject[]> {
         return this.getResourceWithFields<ReducedProject[]>(ProjectPaths.projects, ReducedProjectImpl, { qs: paginationOptions });
     }

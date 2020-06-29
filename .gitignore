@@ -1,3 +1,4 @@
 node_modules/*
-dist/*
+dist/examples.js
+dist/appsscript.json
 .clasprc.json

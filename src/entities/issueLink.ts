@@ -11,6 +11,7 @@ export class IssueLinkTypeImpl {
 }
 
 export interface IssueLinkType extends IssueLinkTypeImpl {
+
 }
 
 export class IssueLinkImpl {

@@ -8,6 +8,7 @@ export const SprintPaths = {
 };
 
 export class SprintEndpoint extends BaseEndpoint {
+
     public all(agileId: string, paginationOptions: PaginationOptions = {}): Promise<ReducedSprint[]> {
         return this.getResourceWithFields<ReducedSprint[]>(this.format(SprintPaths.sprints, { agileId }), ReducedSprintImpl, { qs: paginationOptions });
     }

@@ -8,6 +8,7 @@ export const CommentPaths = {
 };
 
 export class CommentEndpoint extends BaseEndpoint {
+
     public all(issueId: string, paginationOptions: PaginationOptions = {}): Promise<IssueComment[]> {
         return this.getResourceWithFields<IssueComment[]>(this.format(CommentPaths.comments, { issueId }), IssueCommentImpl, { qs: paginationOptions });
     }
