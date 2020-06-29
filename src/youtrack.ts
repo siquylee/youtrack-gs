@@ -33,7 +33,7 @@ interface RequestOptions {
 
 export class Youtrack implements YoutrackClient {
     private readonly baseUrl: string;
-    private defaultRequestOptions: RequestOptions = { muteHttpExceptions: false, contentType: 'application/json' };
+    private defaultRequestOptions: RequestOptions = { muteHttpExceptions: true, contentType: 'application/json' };
     public readonly users: UserEndpoint;
     public readonly tags: TagEndpoint;
     public readonly issues: IssueEndpoint;
@@ -82,8 +82,7 @@ export class Youtrack implements YoutrackClient {
             url = `${url}?${this.toQueryString(params.qs)}`;
             delete params.qs;
         }
-        var res = UrlFetchApp.fetch(url, params);
-        return res;
+        return UrlFetchApp.fetch(url, params);
     }
 
     private formBaseUrl(baseUrl: string): string {
@@ -98,7 +97,7 @@ export class Youtrack implements YoutrackClient {
 
     private prepareParams(method: 'post' | 'get' | 'delete' | 'put', params: any, customHeaders: {}): {} {
         if (method !== 'get') {
-            params.payload = JSON.stringify(params);
+            params.payload = JSON.stringify(params.body ? params.body : params);
         }
         params.method = method;
 

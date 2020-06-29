@@ -18,9 +18,9 @@ module.exports = (env) => {
         },
         output: {
             libraryTarget: 'var',
-            library: 'youtrack',
+            library: 'ytGAS',
             path: dest,
-            filename: `[name]-v${require("./package.json").version.toString()}.js`
+            filename: `[name]-${require("./package.json").version.toString()}.js`
         },
         optimization: {
             minimize: true,
