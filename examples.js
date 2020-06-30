@@ -1,6 +1,6 @@
 const config = {
-  baseUrl: "https://gslack.myjetbrains.com/youtrack",
-  token: "perm:cXV5bHM=.NDctMQ==.l64FIOR6KEGaCAKq3FiZI33dyccBIY"
+  baseUrl: "http://example.myjetbrains.com/youtrack",
+  token: "perm:your-token"
 };
 
 // Users
@@ -441,7 +441,7 @@ function updateSprint() {
   const client = new ytGAS.Youtrack(config);
   client.sprints.update(agileId, { id: '116-1', name: 'my sprint 3' })
     .then(sprint => {
-      Logger.log( sprint );
+      Logger.log(sprint);
     }).catch(err => {
       Logger.log(err);
     });
